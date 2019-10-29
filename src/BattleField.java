@@ -9,7 +9,7 @@ public class BattleField {
         if(ship.getX()<0 || ship.getX()>=10 || ship.getY()<0 || ship.getY()>=10) // Проверить на принадлежность игровому полю 10x10
             return false;
 
-        if(ship.getY() + ship.getLength() >= 10) // Проверить по длинне
+        if(ship.getY() + ship.getLength() >= 10) // Проверить по длине
             return false;
 
 

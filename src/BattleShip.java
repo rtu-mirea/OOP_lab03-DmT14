@@ -56,7 +56,7 @@ public class BattleShip {
 
                 currentUser = user;
 
-                int locchoise = Menu.createPlay(); // Вывести меню Играть/Создать игру
+                int locchoise = Menu.createPlay(); // Вывести меню "Играть/Создать игру"
 
                 if(locchoise == 2) { // Если выбрано создать игру
                     println("Авторизация соперника: ");
@@ -83,7 +83,7 @@ public class BattleShip {
                     gid++;
                 }
 
-                List<Game> locgames = getCurrentUserGames(); // Получить список игры, в которых идет ход игрока currentUser
+                List<Game> locgames = getCurrentUserGames(); // Получить список игр, в которых идет ход игрока currentUser
 
                 if(locgames.size() == 0) {
                     println("Нет доступных игр для данного игрока");
@@ -102,26 +102,26 @@ public class BattleShip {
         }
     }
 
-    static String readLine() throws IOException { // Чтение строки ввода
+    public static String readLine() throws IOException { // Чтение строки ввода
         int ch = 0;
         String input = "";
         do {
-            ch = System.in.read(); // Считат 1 символ
+            ch = System.in.read(); // Считать 1 символ
             input += (char)ch; // Добавить его к выходной строке
-        } while(ch != 13 && ch != 10); // проверка на дочтижение символов конца строки '\r\n'
+        } while(ch != 13 && ch != 10); // проверка на достижение символов конца строки '\r\n'
 
         return input.replaceAll(""+(char)13, "").replaceAll(""+(char)10, ""); // Удалить символы переноса строки
     }
 
-    static public void print (String text) {
+    public static void print (String text) {
         System.out.print(""+text);
     }
 
-    static public void println (String text) {
+    public static void println (String text) {
         System.out.println(""+text);
     }
 
-    static public void addUser (String name, String login, String password, int type) { // Добавить прользователя
+    //public static void addUser (String name, String login, String password, int type) { // Добавить пользователя
         //Не используется. Аналог -
         /*
         String name, login, password;
@@ -140,9 +140,9 @@ public class BattleShip {
         println("Новый пользователь ("+login+":"+password+") создан");
         println("");
         */
-    }
+    //}
 
-    static public User findUser (String login) { // Найти игрока в списке users по логину
+    public static User findUser (String login) { // Найти игрока в списке users по логину
         for(User user : users) {
             if(user.getLogin().compareTo(login) == 0)
                 return user;
@@ -151,7 +151,7 @@ public class BattleShip {
         return null;
     }
 
-    static public List<Game> getCurrentUserGames () { // Получить список игр, в которых идет ход игрока currentUser
+    public static List<Game> getCurrentUserGames () { // Получить список игр, в которых идет ход игрока currentUser
         List<Game> locgames = new ArrayList<Game>();
 
         for(Game game : games) { // Для всех игр в списке games как game
