@@ -22,10 +22,11 @@ public class Ship {
         return y;
     }
 
-    //public makeWound() ? TO DO
+    public void makeWound() {
+        wounds++;
+    }
 
     public boolean isDestroyed() {
-        // TO DO
-        return true;
+        return wounds >= length;
     }
 }

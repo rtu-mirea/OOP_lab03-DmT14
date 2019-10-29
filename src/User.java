@@ -3,8 +3,6 @@ public class User {
     private String login;
     private String password;
 
-    public User() {}
-
     public User(String name, String login, String password) {
         this.name = name;
         this.login = login;
@@ -12,11 +10,18 @@ public class User {
     }
 
     public boolean enter(String login, String password) {
-        // TO DO
-        return true;
+        return false;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
