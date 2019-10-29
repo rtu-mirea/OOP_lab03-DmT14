@@ -4,7 +4,7 @@ public class Menu {
     public static int regLog() throws IOException {
         int choise = 0;
 
-        do {
+        do { // Вывести меню и получить выбор
             System.out.println("==============");
             System.out.println("1 - Авторизация");
             System.out.println("2 - Регистрация");
@@ -21,7 +21,7 @@ public class Menu {
     public static int createPlay() throws IOException {
         int choise = 0;
 
-        do {
+        do { // Вывести меню и получить выбор
             System.out.println("==============");
             System.out.println("1 - Играть");
             System.out.println("2 - Создать партию");

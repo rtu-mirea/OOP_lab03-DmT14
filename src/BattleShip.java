@@ -3,20 +3,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BattleShip {
-    static private List<User> users = new ArrayList<User>();
-    static private List<Game> games = new ArrayList<Game>();
+    static private List<User> users = new ArrayList<User>(); // Список всех зарегистрированных игроков
+    static private List<Game> games = new ArrayList<Game>(); // Список всех начатых игр
 
-    static private User currentUser;
+    static private User currentUser; // Чей ход
 
-    static private int gid = 0;
+    static private int gid = 0; // Глобальное значение id игры (+1 за каждый начатый матч)
 
     public static void main(String [] args) throws IOException {
 
-        while(true) {
+        while(true) { // Пока запущена программа
 
-            int choise = Menu.regLog();
+            int choise = Menu.regLog(); // Вывести главное меню
 
-            if(choise == 2) {
+            if(choise == 2) { // Если выбрана регистрация
                 String name, login, password;
                 do {
                     print("Логин: ");
@@ -36,7 +36,7 @@ public class BattleShip {
                 continue;
             }
 
-            if(choise == 1) {
+            if(choise == 1) { // Если выбрана авторизация
                 String login, password;
                 do {
                     print("Логин: ");
@@ -48,7 +48,7 @@ public class BattleShip {
                 do {
                     print("Пароль: ");
                     password = readLine();
-                } while (password.compareTo(user.getPassword()) != 0);
+                } while (password.compareTo(user.getPassword()) != 0); // Проверка пароля
 
                 println("");
                 println("Пользователь "+user.getName()+" авторизован");
@@ -56,12 +56,12 @@ public class BattleShip {
 
                 currentUser = user;
 
-                int locchoise = Menu.createPlay();
+                int locchoise = Menu.createPlay(); // Вывести меню Играть/Создать игру
 
-                if(locchoise == 2) {
+                if(locchoise == 2) { // Если выбрано создать игру
                     println("Авторизация соперника: ");
 
-                    String login2, password2;
+                    String login2, password2; // Запросить данные соперника
                     do {
                         print("Логин: ");
                         login2 = readLine();
@@ -74,7 +74,7 @@ public class BattleShip {
                         password2 = readLine();
                     } while (password2.compareTo(user2.getPassword()) != 0);
 
-                    games.add(new Game(gid, user, user2));
+                    games.add(new Game(gid, user, user2)); // Когда соперник авторизован добавить игру в список games
 
                     println("");
                     println("Соперник "+user2.getName()+" добавлен в игру №"+gid);
@@ -83,13 +83,13 @@ public class BattleShip {
                     gid++;
                 }
 
-                List<Game> locgames = getCurrentUserGames();
+                List<Game> locgames = getCurrentUserGames(); // Получить список игры, в которых идет ход игрока currentUser
 
                 if(locgames.size() == 0) {
                     println("Нет доступных игр для данного игрока");
                     println("");
                 } else {
-                    for(Game game : locgames) {
+                    for(Game game : locgames) { // Если есть доступные игры, выполнить ход в каждой из них
                         game.makeTurn();
                     }
 
@@ -102,30 +102,47 @@ public class BattleShip {
         }
     }
 
-    static String readLine() throws IOException {
+    static String readLine() throws IOException { // Чтение строки ввода
         int ch = 0;
         String input = "";
         do {
-            ch = System.in.read();
-            input += (char)ch;
-        } while(ch != 13 && ch != 10);
+            ch = System.in.read(); // Считат 1 символ
+            input += (char)ch; // Добавить его к выходной строке
+        } while(ch != 13 && ch != 10); // проверка на дочтижение символов конца строки '\r\n'
 
-        return input.replaceAll(""+(char)13, "").replaceAll(""+(char)10, "");
+        return input.replaceAll(""+(char)13, "").replaceAll(""+(char)10, ""); // Удалить символы переноса строки
     }
 
-    static public void print(String text) {
+    static public void print (String text) {
         System.out.print(""+text);
     }
 
-    static public void println(String text) {
+    static public void println (String text) {
         System.out.println(""+text);
     }
 
-    static public void addUser (String name, String login, String password, int type) {
+    static public void addUser (String name, String login, String password, int type) { // Добавить прользователя
+        //Не используется. Аналог -
+        /*
+        String name, login, password;
+        do {
+            print("Логин: ");
+            login = readLine();
+            print("Пароль: ");
+            password = readLine();
+            print("Имя игрока: ");
+            name = readLine();
+        } while (findUser(login) != null);
 
+        users.add(new User(name, login, password));
+
+        println("");
+        println("Новый пользователь ("+login+":"+password+") создан");
+        println("");
+        */
     }
 
-    static public User findUser (String login) {
+    static public User findUser (String login) { // Найти игрока в списке users по логину
         for(User user : users) {
             if(user.getLogin().compareTo(login) == 0)
                 return user;
@@ -134,10 +151,10 @@ public class BattleShip {
         return null;
     }
 
-    static public List<Game> getCurrentUserGames () {
+    static public List<Game> getCurrentUserGames () { // Получить список игр, в которых идет ход игрока currentUser
         List<Game> locgames = new ArrayList<Game>();
 
-        for(Game game : games) {
+        for(Game game : games) { // Для всех игр в списке games как game
             if(game.getCurrentPlayer() == currentUser)
                 locgames.add(game);
         }
